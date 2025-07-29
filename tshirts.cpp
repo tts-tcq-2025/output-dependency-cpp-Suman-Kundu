@@ -18,7 +18,7 @@ void testTshirtSize() {
     assert(size(37) == 'S');
     assert(size(40) == 'M');
     assert(size(43) == 'L');
-    assert(size(38)=='S');
-    assert(size(42)=='L');
+    assert(size(38)=='S');  // Test failed. Test case is not covering for 38.
+    assert(size(42)=='L');  // Test failed. Test case is not covering for 42.
     std::cout << "All is well (maybe!)\n";
 }
