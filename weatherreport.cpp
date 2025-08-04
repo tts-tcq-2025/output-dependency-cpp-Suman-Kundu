@@ -36,6 +36,23 @@ namespace WeatherSpace
             return 52;
         }
     };
+    class SensorStubLowWindHighRain : public IWeatherSensor {
+        int Humidity() const override {
+            return 60;
+        }
+
+        int Precipitation() const override {
+            return 70;  // High precipitation
+        }
+
+        double TemperatureInC() const override {
+            return 26;  // High temperature
+        }
+
+        int WindSpeedKMPH() const override {
+            return 30;  // Low wind speed
+        }
+    };
     string Report(const IWeatherSensor& sensor)
     {
         int precipitation = sensor.Precipitation();
@@ -71,11 +88,21 @@ namespace WeatherSpace
         string report = Report(sensor);
         assert(report.length() > 0);
     }
+    void TestCondition() 
+    {
+    SensorStubLowWindHighRain sensor;
+    string report = Report(sensor);
+    cout << "Bug Trigger Test Report: " << report << endl;
+
+    // This SHOULD contain "rain" but it doesn't because of the bug
+    assert(report.find("rain") != string::npos);  // This will fail!
+    }
 }
 
 void testWeatherReport() {
     cout << "\nWeather report test\n";
     WeatherSpace::TestRainy();
     WeatherSpace::TestHighPrecipitation();
+    WeatherSpace::TestCondition(); 
     cout << "All is well (maybe)\n";
 }
