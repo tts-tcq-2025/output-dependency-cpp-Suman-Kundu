@@ -3,11 +3,11 @@
 
 char size(int cms) {
     char sizeName = '\0';
-    if(cms < 38) {
+    if(cms < 38) {                            //modify the condition "cms<=38"
         sizeName = 'S';
     } else if(cms > 38 && cms < 42) {
         sizeName = 'M';
-    } else if(cms > 42) {
+    } else if(cms > 42) {                    //modify the condition "cms>=42"
         sizeName = 'L';
     }
     return sizeName;
@@ -18,5 +18,7 @@ void testTshirtSize() {
     assert(size(37) == 'S');
     assert(size(40) == 'M');
     assert(size(43) == 'L');
+    assert(size(38)=='S');  // Test failed. Test case is not covering for 38.
+    assert(size(42)=='L');  // Test failed. Test case is not covering for 42.
     std::cout << "All is well (maybe!)\n";
 }
